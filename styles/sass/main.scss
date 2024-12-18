@@ -15,6 +15,8 @@ html {
   max-width: 40rem;
   margin: 7rem auto 4rem auto;
   padding: 0 1rem;
+  --float-element-height: 5.6rem;
+  margin-bottom: var(--float-element-height);
 
   fieldset {
     display: flex;
@@ -59,10 +61,52 @@ html {
     display: flex;
     column-gap: 0.8rem;
   }
+
+  &__float-submit {
+    padding: 1rem;
+    height: var(--float-element-height);
+    background-color: white;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    transition: all 0.3s;
+
+    @media screen and (min-width: 992px) {
+      position: static;
+      bottom: auto;
+      width: auto;
+      left: auto;
+      height: auto;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    button {
+      border: none;
+      padding: 0.8rem 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+  }
+
+  &__float-submit--hidden {
+    transform: translateY(120%);
+    @media screen and (min-width: 992px) {
+      transform: none;
+    }
+  }
 }
 
 input[type="radio"],
 input[type="checkbox"],
 label[for] {
   cursor: pointer;
+}
+
+.footer {
+  min-height: 20rem;
+  text-align: center;
 }

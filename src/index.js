@@ -1,3 +1,6 @@
 import "../styles/sass/main.scss";
+import { FloatElementHandler } from "./smart_float";
 
-console.log("entra");
+(function () {
+  new FloatElementHandler();
+})();

@@ -14,6 +14,7 @@
       action="/index.html"
       method="POST"
       enctype="multipart/form-data"
+      data-form-element
     >
       <fieldset>
         <legend>Contact form</legend>
@@ -94,7 +95,14 @@
             <textarea name="reasons"></textarea>
           </div>
         </div>
+        <div class="form__row form__float-submit" data-float-element>
+          <div class="form__block">
+            <button type="submit">Send</button>
+          </div>
+        </div>
       </fieldset>
+      <div data-end-form></div>
     </form>
+    <footer class="footer">Some footer</footer>
   </body>
 </html>
