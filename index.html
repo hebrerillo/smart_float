@@ -6,103 +6,118 @@
     <title></title>
     <script defer src="./dist/index.bundle.js"></script>
   </head>
-
   <body>
-    <form
-      id="form_contact"
-      class="form"
-      action="/index.html"
-      method="POST"
-      enctype="multipart/form-data"
-      data-form-element
-    >
-      <fieldset>
-        <legend>Contact form</legend>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">First name:</label>
-            <input class="form__item" type="text" name="firstName" />
+    <header class="site-header">
+      <a href="#">
+        <img class="site-header__logo" src="img/logo.svg" alt="alt" />
+      </a>
+    </header>
+    <main>
+      <form
+        id="form_contact"
+        class="form"
+        action="/index.html"
+        method="POST"
+        enctype="multipart/form-data"
+        data-form-element
+      >
+        <fieldset>
+          <legend>Contact form</legend>
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">First name:</label>
+              <input class="form__item" type="text" name="firstName" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Last name:</label>
-            <input class="form__item" type="text" name="lastName" />
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Last name:</label>
+              <input class="form__item" type="text" name="lastName" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Email:</label>
-            <input class="form__item" type="email" name="email" />
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Email:</label>
+              <input class="form__item" type="email" name="email" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Address: </label>
-            <input class="form__item" type="text" name="address" />
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Address: </label>
+              <input class="form__item" type="text" name="address" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Eye color: </label>
-            <input class="form__item" type="color" name="eye_color" />
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Eye color: </label>
+              <input class="form__item" type="color" name="eye_color" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Country: </label>
-            <select class="form__item" name="country">
-              <option>select country</option>
-              <option value="br">brazil</option>
-              <option value="es">spain</option>
-              <option value="pt">Portugal</option>
-              <option value="fr">France</option>
-            </select>
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Country: </label>
+              <select class="form__item" name="country">
+                <option>select country</option>
+                <option value="br">brazil</option>
+                <option value="es">spain</option>
+                <option value="pt">Portugal</option>
+                <option value="fr">France</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label"> Birth date:</label>
-            <input class="form__item" type="date" name="birthdate" />
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label"> Birth date:</label>
+              <input class="form__item" type="date" name="birthdate" />
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Gender:</label>
-            <div class="form__block--inline">
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Gender:</label>
               <div class="form__block--inline">
-                <input id="male" type="radio" name="gender" value="male" />
-                <label for="male" class="form__item-label">Male</label>
-              </div>
-              <div class="form__block--inline">
-                <input id="female" type="radio" name="gender" value="female" />
-                <label for="female" class="form__item-label">Female</label>
+                <div class="form__block--inline">
+                  <input id="male" type="radio" name="gender" value="male" />
+                  <label for="male" class="form__item-label">Male</label>
+                </div>
+                <div class="form__block--inline">
+                  <input
+                    id="female"
+                    type="radio"
+                    name="gender"
+                    value="female"
+                  />
+                  <label for="female" class="form__item-label">Female</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block--inline">
-            <input id="agree_on_terms" type="checkbox" name="agree_on_terms" />
-            <label for="agree_on_terms" class="form__item-label"
-              >Agree on terms</label
-            >
+          <div class="form__row">
+            <div class="form__block--inline">
+              <input
+                id="agree_on_terms"
+                type="checkbox"
+                name="agree_on_terms"
+              />
+              <label for="agree_on_terms" class="form__item-label"
+                >Agree on terms</label
+              >
+            </div>
           </div>
-        </div>
-        <div class="form__row">
-          <div class="form__block">
-            <label class="form__item-label">Tell us more about you:</label>
-            <textarea name="reasons"></textarea>
+          <div class="form__row">
+            <div class="form__block">
+              <label class="form__item-label">Tell us more about you:</label>
+              <textarea name="reasons"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="form__row form__float-submit" data-float-element>
-          <div class="form__block">
-            <button type="submit">Send</button>
+          <div class="form__row form__float-submit" data-float-element>
+            <div class="form__block">
+              <button type="submit">Send</button>
+            </div>
           </div>
-        </div>
-      </fieldset>
-      <div data-end-form></div>
-    </form>
-    <footer class="footer">Some footer</footer>
+        </fieldset>
+        <div data-end-form></div>
+      </form>
+    </main>
+    <footer class="site-footer">Some footer</footer>
   </body>
 </html>
