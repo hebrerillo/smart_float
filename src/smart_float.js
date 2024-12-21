@@ -8,7 +8,7 @@ export class FloatElementHandler {
   #formElement;
   #formFieldset;
   #isFormEndVisible;
-  #timeoutID;
+  #hiddenTimeoutID; //The timeout ID returned when hidding the floating element.
   #isScrollCallbackExecuting;
   #lastScrollTop;
   constructor() {
@@ -16,7 +16,7 @@ export class FloatElementHandler {
     this.#formElement = document.querySelector("[data-form-element]");
     this.#formFieldset = this.#formElement.querySelector("fieldset");
     this.#isFormEndVisible = false;
-    this.#timeoutID = -1;
+    this.#hiddenTimeoutID = -1;
     this.#isScrollCallbackExecuting = false;
     this.#lastScrollTop =
       window.pageYOffset || document.documentElement.scrollTop;
@@ -29,11 +29,16 @@ export class FloatElementHandler {
   initEvents() {
     this.#formElement?.addEventListener("focusin", this.onFocusIn.bind(this));
     this.#formElement?.addEventListener("focusout", this.onFocusOut.bind(this));
-
     this.#formElement?.addEventListener("input", this.onInput.bind(this));
-
+    this.#formElement?.addEventListener("click", this.onFormClick.bind(this));
     window.addEventListener("scroll", this.onScroll.bind(this));
+    this.configureFormEndObserver();
+  }
 
+  /**
+   * Configures an observer that will check the visibility of the end of the form.
+   */
+  configureFormEndObserver() {
     const floatElementHeight =
       this.#floatElement?.getBoundingClientRect().height;
     const observerOptions = {
@@ -60,11 +65,7 @@ export class FloatElementHandler {
   onScroll() {
     const scrollCallback = () => {
       let st = window.pageYOffset || document.documentElement.scrollTop;
-      if (
-        st > this.#lastScrollTop &&
-        !this.#isFormEndVisible &&
-        this.hasFocusedElement()
-      ) {
+      if (st > this.#lastScrollTop && this.hasFocusedElement()) {
         this.hide();
       } else if (st < this.#lastScrollTop) {
         this.show();
@@ -82,17 +83,59 @@ export class FloatElementHandler {
     this.#isScrollCallbackExecuting = true;
   }
 
-  onInput(event) {
-    if (event.detail?.programatically || event.detail?.fromStorage) {
-      return;
+  /**
+   * Event function to handle click events on the form
+   *
+   * @param {Event} event
+   */
+  onFormClick(event) {
+    const target = event.target;
+    if (this.isFormElementTriggeringKeyboard(target)) {
+      this.hide();
+    } else {
+      this.show();
     }
+  }
+
+  /**
+   * Checks if focusing or clicking 'element' will cause the mobile keyboard
+   * to show up.
+   *
+   * @param {HTMLElement} element An HTML element (most likely, a HTMLInputElement)
+   * @returns {boolean} true if clicking or focusing on element will cause the mobile keyboard to show up, false otherwise
+   */
+  isFormElementTriggeringKeyboard(element) {
+    const type = element.type ?? "";
+    switch (type) {
+      case "text":
+      case "password":
+      case "search":
+      case "email":
+      case "number":
+      case "tel":
+      case "url":
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * Executed when there is an input on the form.
+   */
+  onInput() {
     this.hide();
   }
 
   /**
-   * Callback to be executed when the shipping methods are visible.
+   * Handles the visibility of the floating element when the end of the form is hidden/visible.
    *
-   * @param {Array} entries
+   * If the end of the form is visible, the floating element should be visible. The height of the floating element is substracted
+   * so that it never hides any form input element.
+   *
+   * If the end of the form is not visible, the floating element should be hidden only if the focused element is a form element.
+   *
+   * @param {Array} entries The intersection entries.
    */
   observerCallback(entries) {
     entries.forEach((entry) => {
@@ -137,21 +180,23 @@ export class FloatElementHandler {
   }
 
   /**
-   * Shows the summary event
+   * Shows the floating event
    */
   show() {
     this.#floatElement?.classList.remove("form__float-submit--hidden");
   }
 
   /**
-   * Hides the summary element
+   * Hides the floating element only if the end of the form is not visible.
+   * The floating element is not hidden forever. If there is an inactivity of FLOAT_ELEMENT_HIDDEN_TIEMOUT milliseconds, the
+   * floating element will be shown again.
    */
   hide() {
     if (this.#isFormEndVisible) {
       return;
     }
-    window.clearTimeout(this.#timeoutID);
-    this.#timeoutID = window.setTimeout(
+    window.clearTimeout(this.#hiddenTimeoutID);
+    this.#hiddenTimeoutID = window.setTimeout(
       this.show.bind(this),
       FLOAT_ELEMENT_HIDDEN_TIEMOUT,
     );
