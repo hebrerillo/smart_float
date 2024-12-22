@@ -1,19 +1,30 @@
-An example of a smart float bottom element in pure JavaScript.
+An example of a smart float bottom element implemented in pure JavaScript.
 
-Problem: On mobile devices, when focusing on an input, the mobiel keyboard appears. This could cause that some floating elements could hide some input fields, making user experience really bad.
+Problem: On mobile devices, when the user focuses on an input text for example, the mobiel keyboard appears. This could cause that some floating elements could hide some important elements, like other input fields, and so causing a bad user experience.
 
-The goal of this project is to show an example of an element that will hide in a smart way.
+The screenshot below shows the problem: The floating element hides part of an input element (the weight input element).
 
-The element will be hidden:
+![](./screen_shots/float_element_covers_input.png)
 
-- When the user focus on an input.
+The goal of this project is to implement a smart way to hide and show back the floating element.
 
-- When the user scrolls down the page and the focused element is an input.
+The floating element will be hidden in the following cases:
 
-The element will be be shown:
+- When the user focus on an input that causes the mobile keyboard to show up, like text, password, email, etc...
+
+- When the user scrolls down the page and the focused element is an input that causes the mobile keyboard to appear.
+
+The floating element will be shown in the following cases (regardless of whether the mobile keyboard is being displayed):
 
 - After 5 seconds of inactivity.
 
 - When the user scrolls up the page.
 
-- When the end of the form is displayed.
+- When the user has reached the end of the form.
+
+- When the user clicks on an element that does not cause the mobile keyboard to appear.
+
+
+This is a sample video showing the behaviour of the floating element:
+
+https://hebrerillo.github.io/smart_float/screen_shots/sample.mp4

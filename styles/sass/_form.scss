@@ -20,6 +20,11 @@
     }
   }
 
+  input:focus {
+    border: 1px solid black;
+    outline: none;
+  }
+  
   &__row {
     display: flex;
     column-gap: 4rem;
