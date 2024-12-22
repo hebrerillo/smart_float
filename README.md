@@ -1,4 +1,6 @@
-An example of a smart float bottom element implemented in pure JavaScript.
+# Smart float element implemented in pure JavaScript
+
+Live Site URL: https://hebrerillo.github.io/smart_float/
 
 Problem: On mobile devices, when the user focuses on an input text for example, the mobiel keyboard appears. This could cause that some floating elements could hide some important elements, like other input fields, and so causing a bad user experience.
 
