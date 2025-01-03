@@ -5,6 +5,10 @@
   --float-element-height: 5.6rem;
   margin-bottom: var(--float-element-height);
 
+  input {
+    font-size: 16px;
+  }
+
   fieldset {
     display: flex;
     flex-direction: column;
